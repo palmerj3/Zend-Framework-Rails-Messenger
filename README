@@ -1,0 +1,31 @@
+Zend Framework RailsMessenger Controller Action Helper
+
+Author: Jason Palmer (http://www.jason-palmer.com)
+Owner: Toasted Snow (http://www.toastedsnow.com/)
+
+[description]
+
+This project is an extension to the FlashMessenger Controller Action Helper (http://framework.zend.com/manual/en/zend.controller.actionhelpers.html).
+RailsMessenger provides you with functionality similar to Ruby on Rails Flash Notices (http://api.rubyonrails.org/classes/ActionDispatch/Flash.html).
+
+Using RailsMessenger you can store & display temporary messages to your users and have them properly organized as success, notice, and error messages.
+
+[usage]
+
+Include the helper in your controller:
+
+$this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+
+Populate it with messages:
+
+//success message
+$this->_flashMessenger->addMessage('User Successfully Added','success');
+
+//error message
+$this->_flashMessenger->addMessage('Unable to Add User','error');
+
+//notice/warning message
+$this->_flashMessenger->addMessage('Your password strength is weak','notice');
+
+//default message - same exact usage as FlashMessenger
+$this->_flashMessenger->addMessage('My generic flash message');
