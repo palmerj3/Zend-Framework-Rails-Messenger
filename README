@@ -14,18 +14,18 @@ Using RailsMessenger you can store & display temporary messages to your users an
 
 Include the helper in your controller:
 
-$this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+$this->_railsMessenger = $this->_helper->getHelper('RailsMessenger');
 
 Populate it with messages:
 
 //success message
-$this->_flashMessenger->addMessage('User Successfully Added','success');
+$this->_railsMessenger->addMessage('User Successfully Added','success');
 
 //error message
-$this->_flashMessenger->addMessage('Unable to Add User','error');
+$this->_railsMessenger->addMessage('Unable to Add User','error');
 
 //notice/warning message
-$this->_flashMessenger->addMessage('Your password strength is weak','notice');
+$this->_railsMessenger->addMessage('Your password strength is weak','notice');
 
 //default message - same exact usage as FlashMessenger
-$this->_flashMessenger->addMessage('My generic flash message');
+$this->_railsMessenger->addMessage('My generic flash message');
