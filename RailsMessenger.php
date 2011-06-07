@@ -3,13 +3,13 @@
 /**
  * Helper to get & set notices, errors, and successes properly ALA Ruby on Rails
  *
- * @category   Toasted_Controller
- * @package    Toasted_Controller
+ * @category   Zend_Controller
+ * @package    Zend_Controller
  * @copyright  Copyright (c) 2010 Toasted Snow Inc. (http://www.toastedsnow.com)
  *
  */
 
-class Toasted_Controller_Action_Helper_RailsMessenger extends Zend_Controller_Action_Helper_FlashMessenger
+class Zend_Controller_Action_Helper_RailsMessenger extends Zend_Controller_Action_Helper_FlashMessenger
 {		
 	/* Namespace definition lookup */
 	static protected $_namespaces = array(
