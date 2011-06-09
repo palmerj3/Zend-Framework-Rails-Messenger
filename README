@@ -29,3 +29,6 @@ $this->_railsMessenger->addMessage('Your password strength is weak','notice');
 
 //default message - same exact usage as FlashMessenger
 $this->_railsMessenger->addMessage('My generic flash message');
+
+//send the messages to your view
+$this->_railsMessenger->showMessages();

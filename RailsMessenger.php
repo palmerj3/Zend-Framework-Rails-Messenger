@@ -11,6 +11,8 @@
 
 class Zend_Controller_Action_Helper_RailsMessenger extends Zend_Controller_Action_Helper_FlashMessenger
 {		
+	protected $view;
+	
 	/* Namespace definition lookup */
 	static protected $_namespaces = array(
 		'error' => 'error',
@@ -18,6 +20,19 @@ class Zend_Controller_Action_Helper_RailsMessenger extends Zend_Controller_Actio
 		'success' => 'success',
 		'default' => 'default'
 	);
+	
+	/* View variable name definition lookup */
+	static protected $_view_variables = array(
+		'error' => 'error_messages',
+		'success' => 'success_messages',
+		'notice' => 'notice_messages',
+		'default' => 'messages'
+	);
+	
+	public function  preDispatch() {
+        //get the view 
+        $this->view = $this->getActionController()->view;
+	}
 	
 	/**
      * instantiate object
@@ -61,7 +76,7 @@ class Zend_Controller_Action_Helper_RailsMessenger extends Zend_Controller_Actio
 		parent::setNamespace(self::$_namespaces[$type]);
 		
 		//Retrieve messages
-		$messages = parent::getCurrentMessages();
+		$messages = parent::getMessages();
 		
 		//Post dispatch (clear namespace)
 		parent::postDispatch();
@@ -69,6 +84,38 @@ class Zend_Controller_Action_Helper_RailsMessenger extends Zend_Controller_Actio
 		//Return (yes, I even document the obvious)
 		return $messages;
 	}    
+	
+	/**
+     * retrieves flash messages of a specified type and returns them
+     *
+     * @param string $type - message type (e.g. notice, error, success, default)
+     *
+     * @return array $messages - array of messages for the given type
+     */
+	public function getCurrentMessages($type='default') {
+		//Change namespace to message type
+		parent::setNamespace(self::$_namespaces[$type]);
+		
+		//Retrieve messages
+		$messages = parent::getCurrentMessages();
+		
+		//Post dispatch (clear namespace)
+		parent::postDispatch();
+		
+		//Return (yes, I even document the obvious)
+		return $messages;
+	}
+	
+	/**
+     * creates a view variable for each type of message
+     *
+     */
+	public function showMessages() {
+		foreach(self::$_namespaces as $n=>$v) {
+			$view_var = self::$_view_variables[$n];
+			$this->view->$view_var = array_merge($this->getMessages($n), $this->getCurrentMessages($n));
+		}
+	}
 }
 
 /*
